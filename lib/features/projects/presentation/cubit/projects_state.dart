@@ -1,4 +1,4 @@
-import '../../data/models/project_model.dart';
+import '../../domain/entities/project_entity.dart';
 
 sealed class ProjectsState {
   const ProjectsState();
@@ -13,7 +13,7 @@ final class ProjectsLoading extends ProjectsState {
 }
 
 final class ProjectsLoaded extends ProjectsState {
-  final List<ProjectModel> projects;
+  final List<ProjectEntity> projects;
   const ProjectsLoaded(this.projects);
 }
 

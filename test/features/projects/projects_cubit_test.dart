@@ -2,11 +2,11 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:portfolio/core/error/api_result.dart';
 import 'package:portfolio/core/error/failure.dart';
-import 'package:portfolio/features/projects/logic/entities/project_entity.dart';
-import 'package:portfolio/features/projects/logic/repositories/projects_repository.dart';
-import 'package:portfolio/features/projects/logic/usecases/get_projects_usecase.dart';
-import 'package:portfolio/features/projects/ui/cubit/projects_cubit.dart';
-import 'package:portfolio/features/projects/ui/cubit/projects_state.dart';
+import 'package:portfolio/features/projects/domain/entities/project_entity.dart';
+import 'package:portfolio/features/projects/domain/repositories/projects_repository.dart';
+import 'package:portfolio/features/projects/domain/usecases/get_projects_usecase.dart';
+import 'package:portfolio/features/projects/presentation/cubit/projects_cubit.dart';
+import 'package:portfolio/features/projects/presentation/cubit/projects_state.dart';
 
 /// Fake repository — demonstrates that testing the Cubit requires only
 /// implementing the logic's abstract ProjectsRepository, with zero

@@ -1,20 +1,19 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../data/repositories/projects_repository.dart';
+import '../../domain/usecases/get_projects_usecase.dart';
 import 'projects_state.dart';
 
 class ProjectsCubit extends Cubit<ProjectsState> {
-  final ProjectsRepository _repository;
+  final GetProjectsUseCase _getProjectsUseCase;
 
-  ProjectsCubit(this._repository) : super(const ProjectsInitial());
+  ProjectsCubit(this._getProjectsUseCase) : super(const ProjectsInitial());
 
   Future<void> loadProjects() async {
     emit(const ProjectsLoading());
-    try {
-      final projects = await _repository.getProjects();
-      emit(ProjectsLoaded(projects));
-    } catch (e) {
-      emit(ProjectsError(e.toString()));
-    }
+    final result = await _getProjectsUseCase();
+    result.when(
+      success: (projects) => emit(ProjectsLoaded(projects)),
+      failure: (failure) => emit(ProjectsError(failure.message)),
+    );
   }
 }

@@ -1,10 +1,9 @@
 import '../models/project_model.dart';
 
-/// Handles raw data fetching for projects.
-/// Replace the hardcoded list with an API/local JSON call later.
+/// Mock-only data fetching for the Projects feature.
+/// Throws raw exceptions on failure; never catches them itself.
 class ProjectsService {
   Future<List<ProjectModel>> fetchProjects() async {
-    // Simulate network/IO latency
     await Future.delayed(const Duration(milliseconds: 600));
 
     return const [
@@ -13,8 +12,8 @@ class ProjectsService {
         title: 'Portfolio Website',
         description:
             'A premium dark-themed personal portfolio built with Flutter Web.',
-        imageUrl: 'assets/images/projects/portfolio.png',
         techStack: ['Flutter', 'Dart', 'Cubit'],
+        thumbnailUrl: 'assets/images/projects/portfolio.png',
         liveUrl: 'https://example.com',
         repoUrl: 'https://github.com/example/portfolio',
       ),
@@ -23,23 +22,28 @@ class ProjectsService {
         title: 'E-Commerce App',
         description:
             'A cross-platform shopping app with real-time inventory.',
-        imageUrl: 'assets/images/projects/ecommerce.png',
         techStack: ['Flutter', 'Firebase', 'GetIt'],
+        thumbnailUrl: 'assets/images/projects/ecommerce.png',
         repoUrl: 'https://github.com/example/ecommerce',
       ),
       ProjectModel(
         id: 'p3',
         title: 'Task Manager',
         description: 'A productivity tool with offline-first sync.',
-        imageUrl: 'assets/images/projects/task_manager.png',
         techStack: ['Flutter', 'Hive', 'Cubit'],
+        thumbnailUrl: 'assets/images/projects/task_manager.png',
         liveUrl: 'https://example.com/tasks',
       ),
     ];
+  }
 
-    // Future local JSON example:
-    // final raw = await rootBundle.loadString('assets/data/projects.json');
-    // final List<dynamic> data = jsonDecode(raw);
-    // return data.map((e) => ProjectModel.fromJson(e)).toList();
+  Future<ProjectModel> fetchProjectById(String id) async {
+    await Future.delayed(const Duration(milliseconds: 400));
+
+    final projects = await fetchProjects();
+    return projects.firstWhere(
+      (p) => p.id == id,
+      orElse: () => throw Exception('Project with id "$id" not found.'),
+    );
   }
 }
