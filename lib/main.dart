@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'core/di/injection_container.dart';
 import 'core/theme/app_theme.dart';
 import 'core/utils/app_constants.dart';
-import 'features/home/presentation/pages/home_page.dart';
+import 'shell/app_shell_page.dart';
 
 void main() {
   setupServiceLocator();
@@ -18,8 +18,8 @@ class PortfolioApp extends StatelessWidget {
     return MaterialApp(
       title: AppConstants.appName,
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.darkTheme,
-      home: const HomePage(),
+      theme: AppTheme.dark,
+      home: const AppShellPage(),
     );
   }
 }

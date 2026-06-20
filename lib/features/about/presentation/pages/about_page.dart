@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/di/service_locator.dart';
+import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/widgets/loading_indicator.dart';
 import '../cubit/about_cubit.dart';
 import '../cubit/about_state.dart';
 
 /// Skeleton only — no real UI yet.
+/// A body-only section meant to be placed inside the App Shell's single
+/// Scaffold/scroll view — it does NOT own a Scaffold of its own.
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
 
@@ -24,8 +27,10 @@ class _AboutView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
+    return SizedBox(
+      width: double.infinity,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(minHeight: AppSpacing.massive * 4),
         child: BlocBuilder<AboutCubit, AboutState>(
           builder: (context, state) {
             return switch (state) {
