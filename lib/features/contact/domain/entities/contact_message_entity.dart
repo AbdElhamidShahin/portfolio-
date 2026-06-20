@@ -1,4 +1,5 @@
 /// Pure domain entity representing a message submitted via the contact form.
+/// No Flutter imports — framework-agnostic by design.
 class ContactMessageEntity {
   final String name;
   final String email;

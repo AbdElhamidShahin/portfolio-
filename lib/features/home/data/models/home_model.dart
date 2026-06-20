@@ -6,14 +6,22 @@ class HomeModel {
   final String headline;
   final String tagline;
   final String avatarUrl;
-  final List<String> socialLinks;
+  final String cvAssetPath;
+  final String whatsappUrl;
+  final String githubUrl;
+  final String linkedInUrl;
+  final String gmailUrl;
 
   const HomeModel({
     required this.fullName,
     required this.headline,
     required this.tagline,
     required this.avatarUrl,
-    required this.socialLinks,
+    required this.cvAssetPath,
+    required this.whatsappUrl,
+    required this.githubUrl,
+    required this.linkedInUrl,
+    required this.gmailUrl,
   });
 
   factory HomeModel.fromJson(Map<String, dynamic> json) {
@@ -22,9 +30,11 @@ class HomeModel {
       headline: json['headline'] as String,
       tagline: json['tagline'] as String,
       avatarUrl: json['avatarUrl'] as String,
-      socialLinks: (json['socialLinks'] as List<dynamic>)
-          .map((e) => e.toString())
-          .toList(),
+      cvAssetPath: json['cvAssetPath'] as String,
+      whatsappUrl: json['whatsappUrl'] as String,
+      githubUrl: json['githubUrl'] as String,
+      linkedInUrl: json['linkedInUrl'] as String,
+      gmailUrl: json['gmailUrl'] as String,
     );
   }
 
@@ -34,7 +44,11 @@ class HomeModel {
       'headline': headline,
       'tagline': tagline,
       'avatarUrl': avatarUrl,
-      'socialLinks': socialLinks,
+      'cvAssetPath': cvAssetPath,
+      'whatsappUrl': whatsappUrl,
+      'githubUrl': githubUrl,
+      'linkedInUrl': linkedInUrl,
+      'gmailUrl': gmailUrl,
     };
   }
 
@@ -44,7 +58,11 @@ class HomeModel {
       headline: headline,
       tagline: tagline,
       avatarUrl: avatarUrl,
-      socialLinks: socialLinks,
+      cvAssetPath: cvAssetPath,
+      whatsappUrl: whatsappUrl,
+      githubUrl: githubUrl,
+      linkedInUrl: linkedInUrl,
+      gmailUrl: gmailUrl,
     );
   }
 }
