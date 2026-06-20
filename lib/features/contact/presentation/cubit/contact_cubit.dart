@@ -31,4 +31,11 @@ class ContactCubit extends Cubit<ContactState> {
       failure: (failure) => emit(ContactMessageError(failure.message)),
     );
   }
+
+  /// Returns the submission lifecycle back to idle so the form can be
+  /// reused after a successful send or a failed attempt, without
+  /// re-fetching the contact info that's already loaded.
+  void resetMessageState() {
+    emit(const ContactInitial());
+  }
 }

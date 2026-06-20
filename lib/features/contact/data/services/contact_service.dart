@@ -8,19 +8,16 @@ class ContactService {
     await Future.delayed(const Duration(milliseconds: 600));
 
     return const ContactInfoModel(
-      email: 'hello@example.com',
-      phone: '+20 100 000 0000',
-      location: 'Cairo, Egypt',
-      socialLinks: [
-        'https://github.com/example',
-        'https://linkedin.com/in/example',
-      ],
+      email: 'contact@yourdomain.dev',
+      location: 'Menoufia, Egypt',
+      githubUrl: 'https://github.com/yourusername',
+      linkedInUrl: 'https://linkedin.com/in/yourusername',
     );
   }
 
   Future<void> submitMessage(ContactMessageModel message) async {
     // Simulate network/IO latency for a form submission.
-    await Future.delayed(const Duration(milliseconds: 600));
+    await Future.delayed(const Duration(milliseconds: 900));
     // Mock-only: no real request is made.
   }
 }

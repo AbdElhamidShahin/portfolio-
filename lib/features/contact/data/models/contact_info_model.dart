@@ -2,43 +2,41 @@ import '../../domain/entities/contact_info_entity.dart';
 
 class ContactInfoModel {
   final String email;
-  final String phone;
   final String location;
-  final List<String> socialLinks;
+  final String githubUrl;
+  final String linkedInUrl;
 
   const ContactInfoModel({
     required this.email,
-    required this.phone,
     required this.location,
-    required this.socialLinks,
+    required this.githubUrl,
+    required this.linkedInUrl,
   });
 
   factory ContactInfoModel.fromJson(Map<String, dynamic> json) {
     return ContactInfoModel(
       email: json['email'] as String,
-      phone: json['phone'] as String,
       location: json['location'] as String,
-      socialLinks: (json['socialLinks'] as List<dynamic>)
-          .map((e) => e.toString())
-          .toList(),
+      githubUrl: json['githubUrl'] as String,
+      linkedInUrl: json['linkedInUrl'] as String,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'email': email,
-      'phone': phone,
       'location': location,
-      'socialLinks': socialLinks,
+      'githubUrl': githubUrl,
+      'linkedInUrl': linkedInUrl,
     };
   }
 
   ContactInfoEntity toEntity() {
     return ContactInfoEntity(
       email: email,
-      phone: phone,
       location: location,
-      socialLinks: socialLinks,
+      githubUrl: githubUrl,
+      linkedInUrl: linkedInUrl,
     );
   }
 }
