@@ -1,23 +1,24 @@
 import '../models/contact_info_model.dart';
 import '../models/contact_message_model.dart';
 
-/// Mock-only data fetching/sending for the Contact feature.
-/// Throws raw exceptions on failure; never catches them itself.
+/// Mock-only data source for the Contact feature.
+/// Throws raw exceptions on failure — never catches them itself.
+/// [ContactRepositoryImpl] owns all error mapping.
 class ContactService {
   Future<ContactInfoModel> fetchContactInfo() async {
-    await Future.delayed(const Duration(milliseconds: 600));
+    await Future.delayed(const Duration(milliseconds: 400));
 
     return const ContactInfoModel(
-      email: 'contact@yourdomain.dev',
+      email: 'abdelhamid.shahin.dev@gmail.com',
       location: 'Menoufia, Egypt',
-      githubUrl: 'https://github.com/yourusername',
-      linkedInUrl: 'https://linkedin.com/in/yourusername',
+      githubUrl: 'https://github.com/AbdelhamidShahin',
+      linkedInUrl: 'https://linkedin.com/in/abdelhamid-shahin',
     );
   }
 
   Future<void> submitMessage(ContactMessageModel message) async {
-    // Simulate network/IO latency for a form submission.
-    await Future.delayed(const Duration(milliseconds: 900));
-    // Mock-only: no real request is made.
+    // Simulate network latency for a form submission.
+    await Future.delayed(const Duration(milliseconds: 1200));
+    // Mock-only: in production, replace with an HTTP POST or Supabase insert.
   }
 }

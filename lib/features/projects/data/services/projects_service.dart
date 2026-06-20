@@ -19,7 +19,9 @@ class ProjectsService {
         thumbnailUrl:
             'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1200&auto=format&fit=crop',
         liveUrl: 'https://example.com/voyage',
-        repoUrl: 'https://github.com/example/voyage-booking',
+        githubUrl: 'https://github.com/AbdelhamidShahin/voyage-booking',
+        googlePlayUrl:
+            'https://play.google.com/store/apps/details?id=com.example.voyage',
       ),
       ProjectModel(
         id: 'p2',
@@ -31,8 +33,9 @@ class ProjectsService {
         techStack: ['Flutter', 'HealthKit', 'Firebase', 'Cubit'],
         thumbnailUrl:
             'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1200&auto=format&fit=crop',
-        liveUrl: 'https://example.com/pulse',
-        repoUrl: 'https://github.com/example/pulse-fitness',
+        githubUrl: 'https://github.com/AbdelhamidShahin/pulse-fitness',
+        googlePlayUrl:
+            'https://play.google.com/store/apps/details?id=com.example.pulse',
       ),
       ProjectModel(
         id: 'p3',
@@ -44,7 +47,7 @@ class ProjectsService {
         techStack: ['Flutter', 'GetIt', 'REST API', 'Hive'],
         thumbnailUrl:
             'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=1200&auto=format&fit=crop',
-        repoUrl: 'https://github.com/example/civiclink',
+        githubUrl: 'https://github.com/AbdelhamidShahin/civiclink',
       ),
       ProjectModel(
         id: 'p4',
@@ -56,7 +59,9 @@ class ProjectsService {
         techStack: ['Flutter', 'SQLite', 'Cubit'],
         thumbnailUrl:
             'https://images.unsplash.com/photo-1556909212-d5b65c0f2e6e?q=80&w=1200&auto=format&fit=crop',
-        liveUrl: 'https://example.com/larder',
+        githubUrl: 'https://github.com/AbdelhamidShahin/larder',
+        googlePlayUrl:
+            'https://play.google.com/store/apps/details?id=com.example.larder',
       ),
       ProjectModel(
         id: 'p5',
@@ -68,7 +73,7 @@ class ProjectsService {
         techStack: ['Flutter', 'Drift', 'Cubit', 'fl_chart'],
         thumbnailUrl:
             'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1200&auto=format&fit=crop',
-        repoUrl: 'https://github.com/example/ledger-finance',
+        githubUrl: 'https://github.com/AbdelhamidShahin/ledger-finance',
       ),
       ProjectModel(
         id: 'p6',
@@ -80,15 +85,15 @@ class ProjectsService {
         techStack: ['Flutter', 'Firebase', 'GetIt', 'Google Maps'],
         thumbnailUrl:
             'https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=1200&auto=format&fit=crop',
-        liveUrl: 'https://example.com/wanderlist',
-        repoUrl: 'https://github.com/example/wanderlist',
+        githubUrl: 'https://github.com/AbdelhamidShahin/wanderlist',
+        googlePlayUrl:
+            'https://play.google.com/store/apps/details?id=com.example.wanderlist',
       ),
     ];
   }
 
   Future<ProjectModel> fetchProjectById(String id) async {
     await Future.delayed(const Duration(milliseconds: 400));
-
     final projects = await fetchProjects();
     return projects.firstWhere(
       (p) => p.id == id,

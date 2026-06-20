@@ -1,5 +1,7 @@
 import '../../domain/entities/contact_info_entity.dart';
 
+/// Data-layer shape for contact info. Knows about JSON; the domain layer
+/// never does. Throws raw exceptions — the repository impl catches them.
 class ContactInfoModel {
   final String email;
   final String location;

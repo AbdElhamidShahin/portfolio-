@@ -1,5 +1,6 @@
 import '../../domain/entities/project_entity.dart';
 
+/// Data-layer shape for a single project. JSON-aware; domain layer is not.
 class ProjectModel {
   final String id;
   final String title;
@@ -8,6 +9,8 @@ class ProjectModel {
   final String thumbnailUrl;
   final String? liveUrl;
   final String? repoUrl;
+  final String? githubUrl;
+  final String? googlePlayUrl;
 
   const ProjectModel({
     required this.id,
@@ -17,6 +20,8 @@ class ProjectModel {
     required this.thumbnailUrl,
     this.liveUrl,
     this.repoUrl,
+    this.githubUrl,
+    this.googlePlayUrl,
   });
 
   factory ProjectModel.fromJson(Map<String, dynamic> json) {
@@ -30,6 +35,8 @@ class ProjectModel {
       thumbnailUrl: json['thumbnailUrl'] as String,
       liveUrl: json['liveUrl'] as String?,
       repoUrl: json['repoUrl'] as String?,
+      githubUrl: json['githubUrl'] as String?,
+      googlePlayUrl: json['googlePlayUrl'] as String?,
     );
   }
 
@@ -42,6 +49,8 @@ class ProjectModel {
       'thumbnailUrl': thumbnailUrl,
       'liveUrl': liveUrl,
       'repoUrl': repoUrl,
+      'githubUrl': githubUrl,
+      'googlePlayUrl': googlePlayUrl,
     };
   }
 
@@ -54,6 +63,8 @@ class ProjectModel {
       thumbnailUrl: thumbnailUrl,
       liveUrl: liveUrl,
       repoUrl: repoUrl,
+      githubUrl: githubUrl,
+      googlePlayUrl: googlePlayUrl,
     );
   }
 }

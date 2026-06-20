@@ -1,5 +1,7 @@
 import '../../domain/entities/contact_message_entity.dart';
 
+/// Data-layer shape for an outgoing contact form submission.
+/// Built from a [ContactMessageEntity]; knows about JSON serialisation.
 class ContactMessageModel {
   final String name;
   final String email;

@@ -1,4 +1,5 @@
-/// Pure domain entity for contact info shown on the Contact page.
+/// Pure domain entity for the contact info displayed on the Contact section.
+/// No Flutter imports — framework-agnostic by design.
 class ContactInfoEntity {
   final String email;
   final String location;

@@ -23,19 +23,40 @@ class ContactCubit extends Cubit<ContactState> {
     );
   }
 
-  Future<void> sendMessage(ContactMessageEntity message) async {
+  Future<void> sendMessage({
+    required String name,
+    required String email,
+    required String subject,
+    required String message,
+  }) async {
+    // Guard: do not emit sending if already in that state (double-tap protection)
+    if (state is ContactMessageSending) return;
+
+    // Snapshot the loaded info before emitting so we can restore it after
+    final currentInfo =
+        state is ContactLoaded ? (state as ContactLoaded).info : null;
+
     emit(const ContactMessageSending());
-    final result = await _sendContactMessageUseCase(message);
+
+    final result = await _sendContactMessageUseCase(
+      ContactMessageEntity(
+        name: name,
+        email: email,
+        subject: subject,
+        message: message,
+      ),
+    );
+
     result.when(
       success: (_) => emit(const ContactMessageSent()),
       failure: (failure) => emit(ContactMessageError(failure.message)),
     );
-  }
 
-  /// Returns the submission lifecycle back to idle so the form can be
-  /// reused after a successful send or a failed attempt, without
-  /// re-fetching the contact info that's already loaded.
-  void resetMessageState() {
-    emit(const ContactInitial());
+    // After a result, restore the loaded info so the layout stays visible.
+    // The form widget listens via BlocConsumer and handles its own local state.
+    if (currentInfo != null) {
+      await Future.delayed(const Duration(seconds: 3));
+      if (!isClosed) emit(ContactLoaded(currentInfo));
+    }
   }
 }

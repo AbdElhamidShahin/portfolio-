@@ -14,7 +14,7 @@ class SkillsService {
         name: 'Flutter',
         category: 'frontend',
         categoryLabel: 'Frontend & Cross-Platform',
-        proficiency: 92,
+        proficiency: 90,
         description: 'Advanced layouts, custom painters, animations',
       ),
       SkillModel(
@@ -22,7 +22,7 @@ class SkillsService {
         name: 'Dart',
         category: 'frontend',
         categoryLabel: 'Frontend & Cross-Platform',
-        proficiency: 90,
+        proficiency: 85,
         description: 'Dart 3+, sealed classes, records, async patterns',
       ),
       SkillModel(
@@ -30,7 +30,7 @@ class SkillsService {
         name: 'Flutter Web',
         category: 'frontend',
         categoryLabel: 'Frontend & Cross-Platform',
-        proficiency: 80,
+        proficiency: 70,
         description: 'Responsive SPAs, CanvasKit & HTML renderers',
       ),
       SkillModel(
@@ -38,7 +38,7 @@ class SkillsService {
         name: 'Custom Animations',
         category: 'frontend',
         categoryLabel: 'Frontend & Cross-Platform',
-        proficiency: 78,
+        proficiency: 70,
         description: 'AnimationController, Tween, staggered sequences',
       ),
 
@@ -48,7 +48,7 @@ class SkillsService {
         name: 'Clean Architecture',
         category: 'architecture',
         categoryLabel: 'Architecture & Patterns',
-        proficiency: 90,
+        proficiency: 80,
         description: 'Strict layer separation: presentation → domain → data',
       ),
       SkillModel(
@@ -56,7 +56,7 @@ class SkillsService {
         name: 'SOLID Principles',
         category: 'architecture',
         categoryLabel: 'Architecture & Patterns',
-        proficiency: 88,
+        proficiency: 80,
         description: 'Applied across every feature and domain model',
       ),
       SkillModel(
@@ -64,7 +64,7 @@ class SkillsService {
         name: 'BLoC / Cubit',
         category: 'architecture',
         categoryLabel: 'Architecture & Patterns',
-        proficiency: 92,
+        proficiency: 85,
         description: 'Sealed state unions, UseCase-driven Cubits',
       ),
       SkillModel(
@@ -72,7 +72,7 @@ class SkillsService {
         name: 'Dependency Injection',
         category: 'architecture',
         categoryLabel: 'Architecture & Patterns',
-        proficiency: 85,
+        proficiency: 75,
         description: 'get_it service locator, feature-scoped registrations',
       ),
 
@@ -98,7 +98,7 @@ class SkillsService {
         name: 'Stripe',
         category: 'backend',
         categoryLabel: 'Backend & Integrations',
-        proficiency: 75,
+        proficiency: 70,
         description: 'Payment intents, webhooks, mobile checkout flows',
       ),
       SkillModel(
@@ -127,20 +127,13 @@ class SkillsService {
         proficiency: 70,
         description: 'CI pipelines, automated test runs, build artefacts',
       ),
-      SkillModel(
-        id: 's15',
-        name: 'Cursor',
-        category: 'devops',
-        categoryLabel: 'DevOps & Tools',
-        proficiency: 85,
-        description: 'AI-assisted development, codebase-aware refactors',
-      ),
+
       SkillModel(
         id: 's16',
         name: 'Claude Code',
         category: 'devops',
         categoryLabel: 'DevOps & Tools',
-        proficiency: 82,
+        proficiency: 80,
         description: 'Agentic coding, architecture reviews, code generation',
       ),
     ];

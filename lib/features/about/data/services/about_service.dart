@@ -9,40 +9,40 @@ class AboutService {
     await Future.delayed(const Duration(milliseconds: 600));
 
     return const AboutModel(
-      bio:
-          'I\'m a Flutter developer who obsesses over clean, maintainable '
-          'code. I treat every app as a system — built in layers, where '
-          'business logic is isolated, testable, and completely independent '
-          'of whatever framework or UI is sitting on top of it. '
-          'Clean Architecture and SOLID principles aren\'t just words I\'ve '
-          'read; they\'re the lens I use every time I open a new file.',
-      location: 'Menoufia, Egypt',
-      availability: 'Open to opportunities',
-      education: EducationModel(
-        degree: 'Bachelor\'s Degree in Information Systems',
-        institution: 'Higher Institute for Computers and Information – Tanta',
-        graduationDate: 'June 2026',
-        fieldOfStudy: 'Information Systems',
-      ),
-      focusAreas: [
-        'Clean Architecture',
-        'SOLID Principles',
-        'Cubit / BLoC',
-        'Supabase',
-        'Firebase',
-        'Stripe Integration',
-        'REST APIs',
-        'State Management',
-        'UI / UX',
-        'Flutter Web',
-      ],
-      highlights: [
-        'Built end-to-end Flutter apps for mobile and web from a single codebase',
-        'Applied Clean Architecture with strict layer separation on every project',
-        'Integrated Supabase and Firebase for auth, real-time data, and storage',
-        'Implemented Stripe payment flows in production mobile applications',
-        'Maintained zero Flutter imports inside domain layers across all features',
-      ],
-    );
+        bio:
+            'Flutter Developer with a strong interest in software architecture and scalable application design. '
+            'I build mobile apps using Clean Architecture, SOLID principles, and modern state management approaches '
+            'to create maintainable, testable, and user-focused solutions.',
+        location: 'Menoufia, Egypt',
+        availability: 'Open to opportunities',
+        education: EducationModel(
+          degree: 'Bachelor\'s Degree in Information Systems',
+          institution: 'Higher Institute for Computers and Information – Tanta',
+          graduationDate: 'June 2026',
+          fieldOfStudy: 'Information Systems',
+        ),
+        focusAreas: [
+          'Clean Architecture',
+          'SOLID Principles',
+          'Cubit / BLoC',
+          'Supabase',
+          'Firebase',
+          'Stripe Integration',
+          'REST APIs',
+          'State Management',
+          'UI / UX',
+          'CI / CD',
+          'Flutter Web',
+          'Git & GitHub Workflow',
+          'Dependency Injection',
+          'Authentication & Authorization'
+        ],
+        highlights: [
+          'Published and maintained Flutter applications on Android',
+          'Built hotel booking, fitness, and tourism applications using Flutter',
+          'Used Clean Architecture and BLoC to keep projects organized and scalable',
+          'Worked with Supabase, Firebase, and REST APIs for backend integration',
+          'Implemented payment processing and authentication features',
+        ]);
   }
 }

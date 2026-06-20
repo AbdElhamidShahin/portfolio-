@@ -5,13 +5,26 @@ class HomeEntity {
   final String headline;
   final String tagline;
   final String avatarUrl;
-  final List<String> socialLinks;
+
+  /// Asset path to the CV PDF (e.g. 'assets/cv/abdelhamid_shahin_cv.pdf').
+  /// Used by the Download CV button in the hero CTA row.
+  final String cvAssetPath;
+
+  /// Quick-contact links rendered as icon buttons below the CTA row.
+  final String whatsappUrl;
+  final String githubUrl;
+  final String linkedInUrl;
+  final String gmailUrl; // mailto: link
 
   const HomeEntity({
     required this.fullName,
     required this.headline,
     required this.tagline,
     required this.avatarUrl,
-    required this.socialLinks,
+    required this.cvAssetPath,
+    required this.whatsappUrl,
+    required this.githubUrl,
+    required this.linkedInUrl,
+    required this.gmailUrl,
   });
 }
