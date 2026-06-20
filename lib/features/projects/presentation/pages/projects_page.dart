@@ -142,7 +142,7 @@ class _ProjectsGrid extends StatelessWidget {
         crossAxisCount: crossAxisCount,
         mainAxisSpacing: AppSpacing.lg,
         crossAxisSpacing: AppSpacing.lg,
-        childAspectRatio: 0.82,
+        childAspectRatio: 0.72,
       ),
       itemCount: projects.length,
       itemBuilder: (context, index) => ProjectCard(project: projects[index]),

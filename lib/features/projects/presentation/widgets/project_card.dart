@@ -9,11 +9,11 @@ import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../domain/entities/project_entity.dart';
 
-/// A single project card: thumbnail, title, description, tech tags,
-/// and conditional GitHub / Google Play icon buttons.
+/// A single project card: thumbnail, title, description, and tech tags.
 ///
-/// Stateless-except-for-hover: the parent list/grid passes [ProjectEntity]
-/// in directly so this widget never rebuilds on unrelated Cubit state changes.
+/// Stateless and self-contained on purpose — it never reads from any
+/// Cubit. The parent list/grid passes the [ProjectEntity] in directly,
+/// so this widget never rebuilds when unrelated Cubit state changes.
 class ProjectCard extends StatefulWidget {
   final ProjectEntity project;
 
@@ -56,9 +56,23 @@ class _ProjectCardState extends State<ProjectCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _ProjectThumbnail(
-              imageUrl: project.thumbnailUrl,
-              isHovered: _isHovered,
+            Stack(
+              children: [
+                _ProjectThumbnail(
+                  imageUrl: project.thumbnailUrl,
+                  isHovered: _isHovered,
+                ),
+                if (project.repoUrl != null)
+                  Positioned(
+                    top: AppSpacing.sm,
+                    right: AppSpacing.sm,
+                    child: _ThumbnailIconButton(
+                      icon: Icons.code_rounded,
+                      tooltip: 'View on GitHub',
+                      url: project.repoUrl!,
+                    ),
+                  ),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.all(AppSpacing.lg),
@@ -80,13 +94,9 @@ class _ProjectCardState extends State<ProjectCard> {
                   ),
                   const SizedBox(height: AppSpacing.md),
                   _TechStackRow(techStack: project.techStack),
-                  // Only render the action row if at least one link URL exists
-                  if (project.githubUrl != null ||
-                      project.googlePlayUrl != null) ...[
+                  if (project.playStoreUrl != null) ...[
                     const SizedBox(height: AppSpacing.md),
-                    const Divider(height: 1, color: AppColors.borderSubtle),
-                    const SizedBox(height: AppSpacing.md),
-                    _ProjectLinkRow(project: project),
+                    _GooglePlayBadge(url: project.playStoreUrl!),
                   ],
                 ],
               ),
@@ -97,159 +107,6 @@ class _ProjectCardState extends State<ProjectCard> {
     );
   }
 }
-
-// ─── Link icon row ────────────────────────────────────────────────────────────
-
-class _ProjectLinkRow extends StatelessWidget {
-  final ProjectEntity project;
-
-  const _ProjectLinkRow({required this.project});
-
-  Future<void> _launch(String url) async {
-    final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) await launchUrl(uri);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        if (project.githubUrl != null)
-          _LinkIconButton(
-            tooltip: 'View on GitHub',
-            icon: _GitHubIcon(),
-            onTap: () => _launch(project.githubUrl!),
-          ),
-        if (project.githubUrl != null && project.googlePlayUrl != null)
-          const SizedBox(width: AppSpacing.xs),
-        if (project.googlePlayUrl != null)
-          _LinkIconButton(
-            tooltip: 'View on Google Play',
-            icon: const Icon(
-              Icons.play_arrow_rounded,
-              size: 17,
-              color: AppColors.textSecondary,
-            ),
-            onTap: () => _launch(project.googlePlayUrl!),
-          ),
-      ],
-    );
-  }
-}
-
-class _LinkIconButton extends StatefulWidget {
-  final String tooltip;
-  final Widget icon;
-  final VoidCallback onTap;
-
-  const _LinkIconButton({
-    required this.tooltip,
-    required this.icon,
-    required this.onTap,
-  });
-
-  @override
-  State<_LinkIconButton> createState() => _LinkIconButtonState();
-}
-
-class _LinkIconButtonState extends State<_LinkIconButton> {
-  bool _isHovered = false;
-
-  void _setHovered(bool value) {
-    if (_isHovered == value) return;
-    setState(() => _isHovered = value);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Tooltip(
-      message: widget.tooltip,
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        onEnter: (_) => _setHovered(true),
-        onExit: (_) => _setHovered(false),
-        child: GestureDetector(
-          onTap: widget.onTap,
-          child: AnimatedContainer(
-            duration: AppDurations.fast,
-            padding: const EdgeInsets.all(AppSpacing.xs),
-            decoration: BoxDecoration(
-              color: _isHovered ? AppColors.bgElevated : Colors.transparent,
-              borderRadius: BorderRadius.circular(AppRadius.sm),
-              border: Border.all(
-                color: _isHovered
-                    ? AppColors.borderDefault
-                    : Colors.transparent,
-              ),
-            ),
-            child: widget.icon,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-/// Custom painted GitHub logo — avoids any icon font dependency.
-class _GitHubIcon extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 17,
-      height: 17,
-      child: CustomPaint(painter: _GitHubPainter()),
-    );
-  }
-}
-
-class _GitHubPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = AppColors.textSecondary
-      ..style = PaintingStyle.fill;
-
-    // Simplified GitHub Octocat silhouette drawn as a rounded blob
-    final path = Path();
-    final cx = size.width / 2;
-    final cy = size.height / 2;
-    final r = size.width * 0.44;
-
-    path.addOval(Rect.fromCircle(center: Offset(cx, cy), radius: r));
-
-    // Ear notches (top-right and top-left)
-    final earR = r * 0.22;
-    path.addOval(Rect.fromCircle(
-      center: Offset(cx + r * 0.60, cy - r * 0.62),
-      radius: earR,
-    ));
-    path.addOval(Rect.fromCircle(
-      center: Offset(cx - r * 0.60, cy - r * 0.62),
-      radius: earR,
-    ));
-
-    canvas.drawPath(path, paint);
-
-    // Eye holes (white cutouts via blend)
-    final eyePaint = Paint()
-      ..color = AppColors.bgSurface
-      ..style = PaintingStyle.fill;
-    final eyeR = r * 0.13;
-    canvas.drawOval(
-      Rect.fromCircle(center: Offset(cx - r * 0.26, cy - r * 0.10), radius: eyeR),
-      eyePaint,
-    );
-    canvas.drawOval(
-      Rect.fromCircle(center: Offset(cx + r * 0.26, cy - r * 0.10), radius: eyeR),
-      eyePaint,
-    );
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
-}
-
-// ─── Thumbnail ────────────────────────────────────────────────────────────────
 
 class _ProjectThumbnail extends StatelessWidget {
   final String imageUrl;
@@ -302,20 +159,183 @@ class _ThumbnailFallback extends StatelessWidget {
   }
 }
 
-// ─── Tech stack ───────────────────────────────────────────────────────────────
+/// Opens [url] in the platform's default handler (browser tab on web).
+/// Shared by every tappable link in this card so the try/guard logic
+/// lives in exactly one place.
+Future<void> _launchProjectUrl(String url) async {
+  final uri = Uri.parse(url);
+  if (await canLaunchUrl(uri)) {
+    await launchUrl(uri, mode: LaunchMode.externalApplication);
+  }
+}
+
+/// Small icon button overlaid on the thumbnail's corner (e.g. GitHub).
+/// Stops the tap from bubbling up to anything behind the thumbnail.
+class _ThumbnailIconButton extends StatefulWidget {
+  final IconData icon;
+  final String tooltip;
+  final String url;
+
+  const _ThumbnailIconButton({
+    required this.icon,
+    required this.tooltip,
+    required this.url,
+  });
+
+  @override
+  State<_ThumbnailIconButton> createState() => _ThumbnailIconButtonState();
+}
+
+class _ThumbnailIconButtonState extends State<_ThumbnailIconButton> {
+  bool _isHovered = false;
+
+  void _setHovered(bool value) {
+    if (_isHovered == value) return;
+    setState(() => _isHovered = value);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Tooltip(
+      message: widget.tooltip,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        onEnter: (_) => _setHovered(true),
+        onExit: (_) => _setHovered(false),
+        child: GestureDetector(
+          onTap: () => _launchProjectUrl(widget.url),
+          child: AnimatedContainer(
+            duration: AppDurations.fast,
+            width: 36,
+            height: 36,
+            decoration: BoxDecoration(
+              color: _isHovered
+                  ? AppColors.bgBase.withOpacity(0.85)
+                  : AppColors.bgBase.withOpacity(0.55),
+              borderRadius: BorderRadius.circular(AppRadius.sm),
+              border: Border.all(
+                color: _isHovered
+                    ? AppColors.borderAccent.withOpacity(0.6)
+                    : AppColors.borderSubtle,
+              ),
+            ),
+            child: Icon(
+              widget.icon,
+              size: 18,
+              color: AppColors.textPrimary,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// "Get it on Google Play" badge, shown only when a project has a
+/// [ProjectEntity.playStoreUrl]. Styled to evoke the familiar store
+/// badge shape without reproducing Google's actual logo/artwork.
+class _GooglePlayBadge extends StatefulWidget {
+  final String url;
+
+  const _GooglePlayBadge({required this.url});
+
+  @override
+  State<_GooglePlayBadge> createState() => _GooglePlayBadgeState();
+}
+
+class _GooglePlayBadgeState extends State<_GooglePlayBadge> {
+  bool _isHovered = false;
+
+  void _setHovered(bool value) {
+    if (_isHovered == value) return;
+    setState(() => _isHovered = value);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => _setHovered(true),
+      onExit: (_) => _setHovered(false),
+      child: GestureDetector(
+        onTap: () => _launchProjectUrl(widget.url),
+        child: AnimatedContainer(
+          duration: AppDurations.fast,
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.md,
+            vertical: AppSpacing.xs,
+          ),
+          decoration: BoxDecoration(
+            color: _isHovered ? AppColors.bgSurfaceHover : AppColors.bgBase,
+            borderRadius: AppRadius.button,
+            border: Border.all(
+              color: _isHovered
+                  ? AppColors.borderStrong
+                  : AppColors.borderDefault,
+            ),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(
+                Icons.play_arrow_rounded,
+                size: 22,
+                color: AppColors.textPrimary,
+              ),
+              const SizedBox(width: AppSpacing.xs),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'GET IT ON',
+                    style: AppTextStyles.caption.copyWith(
+                      fontSize: 9,
+                      letterSpacing: 0.6,
+                      color: AppColors.textTertiary,
+                    ),
+                  ),
+                  Text(
+                    'Google Play',
+                    style: AppTextStyles.bodyMd.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.textPrimary,
+                      height: 1.1,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 class _TechStackRow extends StatelessWidget {
   final List<String> techStack;
+
+  /// Caps how many tags are rendered before collapsing the rest into a
+  /// "+N" badge. Without a cap, real project data (6+ tags) wraps to an
+  /// unbounded number of rows and overflows the card's fixed grid-cell
+  /// height — this keeps the tag area's height deterministic.
+  static const int _maxVisibleTags = 4;
 
   const _TechStackRow({required this.techStack});
 
   @override
   Widget build(BuildContext context) {
+    final visibleTags = techStack.take(_maxVisibleTags).toList();
+    final hiddenCount = techStack.length - visibleTags.length;
+
     return Wrap(
       spacing: AppSpacing.xs,
       runSpacing: AppSpacing.xs,
       children: [
-        for (final tech in techStack) _TechTag(label: tech),
+        for (final tech in visibleTags) _TechTag(label: tech),
+        if (hiddenCount > 0) _TechTag(label: '+$hiddenCount'),
       ],
     );
   }

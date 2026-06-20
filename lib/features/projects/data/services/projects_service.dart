@@ -10,84 +10,83 @@ class ProjectsService {
     return const [
       ProjectModel(
         id: 'p1',
-        title: 'Voyage — Hotel Booking App',
+        title: 'Aqua — Hotel Guide (Graduation Project)',
         description:
-            'A cross-platform hotel discovery and booking experience with '
-            'live availability, secure checkout, and an itinerary manager. '
-            'Built for speed on both iOS and Android from a single codebase.',
-        techStack: ['Flutter', 'Cubit', 'Stripe', 'Google Maps'],
-        thumbnailUrl:
-            'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1200&auto=format&fit=crop',
-        liveUrl: 'https://example.com/voyage',
-        githubUrl: 'https://github.com/AbdelhamidShahin/voyage-booking',
-        googlePlayUrl:
-            'https://play.google.com/store/apps/details?id=com.example.voyage',
+            'A production-ready hotel discovery and reservation platform built using professional architectural standards. '
+            'It features seamless room browsing, robust booking lifecycle management, secure Stripe payment gateway integration, '
+            'and real-time data synchronization backed by Supabase.',
+        techStack: [
+          'Flutter',
+          'Dart',
+          'Clean Architecture',
+          'BLoC / Cubit',
+          'Supabase',
+          'Stripe',
+        ],
+        thumbnailUrl: 'assets/images/image1.jpeg',
+        repoUrl: 'https://github.com/AbdElhamidShahin/Hotel-Guide',
       ),
       ProjectModel(
         id: 'p2',
-        title: 'Pulse — Fitness Tracking App',
+        title: 'Power Pulse — Fitness & Nutrition Tracker',
         description:
-            'A workout and health-tracking companion with adaptive training '
-            'plans, wearable sync, and real-time progress charts that keep '
-            'users motivated session after session.',
-        techStack: ['Flutter', 'HealthKit', 'Firebase', 'Cubit'],
+            'A complete fitness and nutrition companion for tracking workouts, calories, '
+            'and BMI. Features real-time food and exercise data via external APIs, smooth '
+            'custom animations, and secure cloud synchronization.',
+        techStack: [
+          'Flutter',
+          'Dart',
+          'BLoC',
+          'MVVM',
+          'Firebase',
+          'Dio',
+          'REST API'
+        ],
         thumbnailUrl:
-            'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1200&auto=format&fit=crop',
-        githubUrl: 'https://github.com/AbdelhamidShahin/pulse-fitness',
-        googlePlayUrl:
-            'https://play.google.com/store/apps/details?id=com.example.pulse',
-      ),
-      ProjectModel(
-        id: 'p3',
-        title: 'CivicLink — City Services Directory',
-        description:
-            'A unified directory connecting residents to municipal services, '
-            'permits, and local announcements, with offline-first access for '
-            'low-connectivity areas and full accessibility support.',
-        techStack: ['Flutter', 'GetIt', 'REST API', 'Hive'],
-        thumbnailUrl:
-            'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=1200&auto=format&fit=crop',
-        githubUrl: 'https://github.com/AbdelhamidShahin/civiclink',
-      ),
-      ProjectModel(
-        id: 'p4',
-        title: 'Larder — Recipe & Pantry Planner',
-        description:
-            'A meal-planning app that turns pantry inventory into recipe '
-            'suggestions, generates shopping lists, and reduces household '
-            'food waste through smart expiry tracking.',
-        techStack: ['Flutter', 'SQLite', 'Cubit'],
-        thumbnailUrl:
-            'https://images.unsplash.com/photo-1556909212-d5b65c0f2e6e?q=80&w=1200&auto=format&fit=crop',
-        githubUrl: 'https://github.com/AbdelhamidShahin/larder',
-        googlePlayUrl:
-            'https://play.google.com/store/apps/details?id=com.example.larder',
+            'assets/images/Purple Pink Gradient Mobile Application Presentation-page-001.jpg',
+        repoUrl: 'https://github.com/AbdElhamidShahin/power-pulse-fitness-app',
+        playStoreUrl:
+            'https://play.google.com/store/apps/details?id=com.yourcompanyname.yourappname&hl=ar', // ملحوظة: يمكنك استبدال الـ ID هنا بـ Package Name الحقيقي الخاص بك على الـ Store إذا كان مختلفاً
       ),
       ProjectModel(
         id: 'p5',
-        title: 'Ledger — Personal Finance Tracker',
+        title: 'Dalily — City Services Locator',
         description:
-            'A privacy-first budgeting app with automatic categorization, '
-            'multi-currency support, and visual spending insights — all '
-            'computed on-device with no data leaving the user\'s phone.',
-        techStack: ['Flutter', 'Drift', 'Cubit', 'fl_chart'],
-        thumbnailUrl:
-            'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1200&auto=format&fit=crop',
-        githubUrl: 'https://github.com/AbdelhamidShahin/ledger-finance',
+            'A location-based directory application that helps users easily discover '
+            'nearby city services such as pharmacies, clinics, restaurants, and repair centers. '
+            'It features a dual-system allowing merchants to list their services, '
+            'which appear instantly across the app once reviewed and approved by the admin panel.',
+        techStack: [
+          'Flutter',
+          'Dart',
+          'Cubit',
+          'MVVM',
+          'Firebase Auth',
+          'Supabase Storage',
+          'Location Services'
+        ],
+        thumbnailUrl: 'assets/images/707shots_so.png',
+        repoUrl: 'https://github.com/AbdElhamidShahin/daliliy-tourism-guide',
       ),
       ProjectModel(
         id: 'p6',
-        title: 'Wanderlist — Travel Itinerary Planner',
+        title: 'Quran Karim — قرآننا',
         description:
-            'A collaborative trip planner letting groups build shared '
-            'itineraries, split expenses, and sync changes in real time '
-            'across every traveler\'s device.',
-        techStack: ['Flutter', 'Firebase', 'GetIt', 'Google Maps'],
-        thumbnailUrl:
-            'https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=1200&auto=format&fit=crop',
-        githubUrl: 'https://github.com/AbdelhamidShahin/wanderlist',
-        googlePlayUrl:
-            'https://play.google.com/store/apps/details?id=com.example.wanderlist',
+            'An offline-first Islamic application featuring the complete Holy Quran '
+            'with last-read tracking, quick surah search, an electronic Misbaha, and daily Azkar. '
+            'It provides GPS-based prayer times according to the user\'s location, supporting both dark and light modes.',
+        techStack: [
+          'Flutter',
+          'Dart',
+          'Cubit',
+          'MVVM',
+          'SQLite',
+          'Location Services',
+        ],
+        thumbnailUrl: 'assets/images/Screenshot 2025-05-01 143703.png',
+        repoUrl: 'https://github.com/AbdElhamidShahin/quran-karim-flutter-app',
+        playStoreUrl:
+            'https://play.google.com/store/apps/details?id=com.abdo.quranapp&hl=ar',
       ),
     ];
   }
