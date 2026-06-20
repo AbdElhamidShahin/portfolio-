@@ -9,9 +9,12 @@ class HomeService {
     await Future.delayed(const Duration(milliseconds: 600));
 
     return const HomeModel(
-      fullName: 'Your Name',
-      headline: 'Flutter & Mobile Engineer',
-      tagline: 'I build clean, performant cross-platform apps.',
+      fullName: 'Abdelhamid Shahin',
+      headline: 'Junior Flutter Developer',
+      tagline:
+          'I engineer clean, scalable mobile and web apps with Flutter — '
+          'built on Clean Architecture, tuned for performance, and designed '
+          'to grow without breaking.',
       avatarUrl: 'assets/images/home/avatar.png',
       socialLinks: [
         'https://github.com/example',
