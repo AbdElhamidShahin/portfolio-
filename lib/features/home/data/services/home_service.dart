@@ -10,9 +10,8 @@ class HomeService {
       tagline: 'I engineer clean, scalable mobile and web apps with Flutter — '
           'built on Clean Architecture, tuned for performance, and designed '
           'to grow without breaking.',
-      avatarUrl: 'assets/images/home/avatar.jpeg',
+      avatarUrl: 'images/home/avatar.png',
       cvAssetPath: 'assets/cv/abdelhamid_shahin_cv.pdf',
-      // Replace the number with your real WhatsApp number (international, no +)
       whatsappUrl: 'https://wa.me/201205687372',
       githubUrl: 'https://github.com/AbdElhamidShahin',
       linkedInUrl: 'https://www.linkedin.com/in/abd-el-hamid-shahin-7a035b268/',

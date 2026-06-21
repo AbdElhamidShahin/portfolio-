@@ -15,10 +15,6 @@ import '../../domain/entities/home_entity.dart';
 import '../cubit/home_cubit.dart';
 import '../cubit/home_state.dart';
 
-/// Hero section for the single-page portfolio.
-///
-/// A body-only section — never owns a Scaffold of its own.
-/// [onViewWorkTap] and [onContactTap] are VoidCallbacks wired by the App Shell.
 class HomePage extends StatelessWidget {
   final VoidCallback? onViewWorkTap;
   final VoidCallback? onContactTap;
@@ -103,8 +99,6 @@ class _HomeErrorView extends StatelessWidget {
   }
 }
 
-// ─── Hero section ─────────────────────────────────────────────────────────────
-
 class _HeroSection extends StatelessWidget {
   final HomeEntity profile;
   final VoidCallback? onViewWorkTap;
@@ -157,23 +151,11 @@ class _HeroSection extends StatelessWidget {
                   ],
                 )
               : Row(
-                  // Was CrossAxisAlignment.center — that centered the
-                  // portrait against the FULL height of `content`
-                  // (badge + greeting + headline + tagline + CTAs +
-                  // quick-contact icons), which is much taller than the
-                  // portrait itself. That pushed the portrait's visual
-                  // center down to roughly the CTA row instead of the
-                  // headline. Switching to `start` + Align(topCenter)
-                  // below lets us control the portrait's position
-                  // explicitly instead of having it centered against
-                  // a column it has no relation to.
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
                       flex: 7,
                       child: Padding(
-                        // Nudges the text block down slightly so it
-                        // meets the portrait roughly at the same level.
                         padding: const EdgeInsets.only(top: AppSpacing.xl),
                         child: content,
                       ),
@@ -184,8 +166,6 @@ class _HeroSection extends StatelessWidget {
                       child: Align(
                         alignment: Alignment.topCenter,
                         child: Padding(
-                          // Small breathing room above the portrait so
-                          // it doesn't sit flush at the very top edge.
                           padding: const EdgeInsets.only(top: AppSpacing.md),
                           child: SizedBox(
                             width: 320,
@@ -202,8 +182,6 @@ class _HeroSection extends StatelessWidget {
     );
   }
 }
-
-// ─── Hero content (text + CTA + quick links) ──────────────────────────────────
 
 class _HeroContent extends StatelessWidget {
   final HomeEntity profile;
@@ -264,8 +242,6 @@ class _HeroContent extends StatelessWidget {
   }
 }
 
-// ─── CTA row (View Work · Contact Me · Download CV) ──────────────────────────
-
 class _CtaRow extends StatelessWidget {
   final HomeEntity profile;
   final bool isCompact;
@@ -309,8 +285,6 @@ class _CtaRow extends StatelessWidget {
     );
   }
 }
-
-// ─── Quick-contact icon row (WhatsApp · GitHub · LinkedIn · Gmail) ────────────
 
 class _QuickContactRow extends StatelessWidget {
   final HomeEntity profile;
