@@ -123,17 +123,25 @@ class _ProjectThumbnail extends StatelessWidget {
           duration: AppDurations.moderate,
           curve: Curves.easeOut,
           scale: isHovered ? 1.05 : 1.0,
-          child: Image.network(
-            imageUrl,
-            fit: BoxFit.cover,
-            loadingBuilder: (context, child, progress) {
-              if (progress == null) return child;
-              return const _ThumbnailFallback(isError: false);
-            },
-            errorBuilder: (context, error, stackTrace) {
-              return const _ThumbnailFallback(isError: true);
-            },
-          ),
+          child: imageUrl.startsWith('http')
+              ? Image.network(
+                  imageUrl,
+                  fit: BoxFit.cover,
+                  loadingBuilder: (context, child, progress) {
+                    if (progress == null) return child;
+                    return const _ThumbnailFallback(isError: false);
+                  },
+                  errorBuilder: (context, error, stackTrace) {
+                    return const _ThumbnailFallback(isError: true);
+                  },
+                )
+              : Image.asset(
+                  imageUrl,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return const _ThumbnailFallback(isError: true);
+                  },
+                ),
         ),
       ),
     );

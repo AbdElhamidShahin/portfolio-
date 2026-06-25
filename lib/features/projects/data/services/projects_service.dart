@@ -10,7 +10,6 @@ class ProjectsService {
     return const [
       ProjectModel(
         id: 'p1',
-
         title: 'Aqua — Hotel Guide (Graduation Project)',
         description:
             'A production-ready hotel discovery and reservation platform built using professional architectural standards. '

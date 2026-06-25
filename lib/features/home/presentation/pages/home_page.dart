@@ -421,9 +421,15 @@ class _DownloadCvButtonState extends State<_DownloadCvButton> {
   }
 
   Future<void> _download() async {
-    // On Flutter Web: open the asset URL in a new tab so the browser
-    // triggers a native download. On other platforms, launch via url_launcher.
-    final uri = Uri.parse(widget.cvAssetPath);
+    // launchUrl() is a raw browser navigation — it does NOT go through
+    // Flutter's AssetBundle, so it needs the path the browser actually
+    // serves, not the pubspec.yaml-declared asset key. On Flutter Web,
+    // an asset declared as `assets/cv/foo.pdf` is served at
+    // `/assets/assets/cv/foo.pdf` (the engine doubles the `assets/`
+    // prefix) — widgets like Image.asset() handle that translation
+    // internally, but a raw launchUrl() call must do it manually.
+    final path = kIsWeb ? 'assets/${widget.cvAssetPath}' : widget.cvAssetPath;
+    final uri = kIsWeb ? Uri(path: '/$path') : Uri.parse(path);
     if (kIsWeb) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
     } else {
